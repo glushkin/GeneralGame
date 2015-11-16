@@ -1,17 +1,22 @@
-﻿Сборка начата 16.11.2015 3:15:05.
+﻿Сборка начата 16.11.2015 4:05:43.
      1>Проект "C:\Users\m00nster\Documents\Visual Studio 2015\Projects\WATAFAK\WATAFAK\WATAFAK.vcxproj" в узле 2 (целевые объекты Build).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /IC:\SFML\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D SFML_DYNAMIC /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(27): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
-     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(63): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
-     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(79): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(87): warning C4305: =: усечение из "double" к "float"
-     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(88): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(94): warning C4305: =: усечение из "double" к "float"
-     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(95): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
-     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(101): warning C4305: =: усечение из "double" к "float"
-     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(105): warning C4305: =: усечение из "double" к "float"
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\view.h(23): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\view.h(27): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\view.h(31): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\view.h(34): warning C4244: аргумент: преобразование "double" в "float", возможна потеря данных
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(29): warning C4244: аргумент: преобразование "float" в "int", возможна потеря данных
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(81): warning C4244: инициализация: преобразование "sf::Int64" в "float", возможна потеря данных
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(97): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(106): warning C4305: =: усечение из "double" к "float"
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(107): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(115): warning C4305: =: усечение из "double" к "float"
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(116): warning C4244: +=: преобразование "double" в "float", возможна потеря данных
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(124): warning C4305: =: усечение из "double" к "float"
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(130): warning C4305: =: усечение из "double" к "float"
+     1>c:\users\m00nster\documents\visual studio 2015\projects\watafak\watafak\main.cpp(151): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\m00nster\Documents\Visual Studio 2015\Projects\WATAFAK\Debug\WATAFAK.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SFML\lib "sfml-graphics-d.lib" "sfml-window-d.lib" "sfml-system-d.lib" "sfml-audio-d.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\m00nster\Documents\Visual Studio 2015\Projects\WATAFAK\Debug\WATAFAK.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\m00nster\Documents\Visual Studio 2015\Projects\WATAFAK\Debug\WATAFAK.lib" /MACHINE:X86 Debug\main.obj
          WATAFAK.vcxproj -> C:\Users\m00nster\Documents\Visual Studio 2015\Projects\WATAFAK\Debug\WATAFAK.exe
@@ -19,4 +24,4 @@
 
 Сборка успешно завершена.
 
-Затраченное время: 00:00:01.22
+Затраченное время: 00:00:01.65

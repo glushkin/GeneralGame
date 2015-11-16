@@ -1,15 +1,17 @@
 #include <iostream> 
 #include <SFML/Graphics.hpp>
-
+#include "map.h" //подключили код с картой
+#include "view.h"//подключили код с видом камеры
 
 using namespace sf;
 
 
 
 ////////////////////////////////////////////////////КЛАСС ИГРОКА////////////////////////
-class Player { // класс Игрока
+class Player {  // класс игрока
+private: float x, y = 0;
 public:
-	float x, y, w, h, dx, dy, speed = 0; //координаты игрока х и у, высота ширина, ускорение (по х и по у), сама скорость
+	float w, h, dx, dy, speed = 0; //координаты игрока х и у, высота ширина, ускорение (по х и по у), сама скорость
 	int dir = 0; //направление (direction) движения игрока
 	String File; //файл с расширением
 	Image image;//сфмл изображение
@@ -45,13 +47,29 @@ public:
 		speed = 0;//зануляем скорость, чтобы персонаж остановился.
 		sprite.setPosition(x, y); //выводим спрайт в позицию x y , посередине. бесконечно выводим в этой функции, иначе бы наш спрайт стоял на месте.
 	}
+
+	float GetPlayerCoordinateX() {	//этим методом будем забирать координату Х	
+		return x;
+	}
+	float GetPlayerCoordinateY() {	//этим методом будем забирать координату Y 	
+		return y;
+	}
 };
 
 
 int main()
 {
 	RenderWindow window(sf::VideoMode(1024, 768), "KOSTROMIN FIGHTER"); //размер окна
+	view.reset(sf::FloatRect(0, 0, 1024, 768));//размер "вида" камеры при создании объекта вида камеры. (потом можем менять как хотим) Что то типа инициализации.
 
+
+
+	Image map_image;//объект изображения для карты
+	map_image.loadFromFile("images/map.png");//загружаем файл для карты
+	Texture map;//текстура карты
+	map.loadFromImage(map_image);//заряжаем текстуру картинкой
+	Sprite s_map;//создаём спрайт для карты
+	s_map.setTexture(map);//заливаем текстуру спрайтом
 	float CurrentFrame = 0;//хранит текущий кадр
 	Clock clock; //создаем переменную времени, т.о. привязка ко времени(а не мощности/загруженности процессора). 
 
@@ -78,37 +96,64 @@ int main()
 		if ((!Keyboard::isKeyPressed(Keyboard::W) || (!Keyboard::isKeyPressed(Keyboard::S)) || (!Keyboard::isKeyPressed(Keyboard::D)) || (!Keyboard::isKeyPressed(Keyboard::A)))) {
 			CurrentFrame += 0.004*time; //служит для прохождения по "кадрам". переменная доходит до трех суммируя произведение времени и скорости. изменив 0.005 можно изменить скорость анимации
 			if (CurrentFrame > 5) CurrentFrame -= 5; //проходимся по кадрам с первого по третий включительно. если пришли к третьему кадру - откидываемся назад.
-
 			p.sprite.setTextureRect(IntRect(110 * int(CurrentFrame), 10, 110, 125)); //проходимся по координатам Х. первая цифра 96 – передвижение прямоугольника по иксу. вторая 96 – координата игрек. третья – ширина прямоугольника, четвертая цифра – его высота.
+			GetPlayerCoordinateforview(p.GetPlayerCoordinateX(), p.GetPlayerCoordinateY());//передаем координаты игрока в функцию управления камерой
+
 
 		}
 
 		if ((Keyboard::isKeyPressed(Keyboard::Left) || (Keyboard::isKeyPressed(Keyboard::A)))) {
 			p.dir = 1; p.speed = 0.1;//dir =1 - направление вверх, speed =0.1 - скорость движения. Заметьте - время мы уже здесь ни на что не умножаем и нигде не используем каждый раз
-			CurrentFrame += 0.0005*time;
+			CurrentFrame += 0.0004*time;
 			if (CurrentFrame > 6) CurrentFrame -= 6;
 			p.sprite.setTextureRect(IntRect(120 *int(CurrentFrame), 168, 120, 120)); //через объект p класса player меняем спрайт, делая анимацию (используя оператор точку)
+			GetPlayerCoordinateforview(p.GetPlayerCoordinateX(), p.GetPlayerCoordinateY());//передаем координаты игрока в функцию управления камерой
+
 		}
 
 		if ((Keyboard::isKeyPressed(Keyboard::Right) || (Keyboard::isKeyPressed(Keyboard::D)))) {
 			p.dir = 0; p.speed = 0.1;//направление вправо, см выше
-			CurrentFrame += 0.0005*time;
+			CurrentFrame += 0.0004*time;
 			if (CurrentFrame > 6) CurrentFrame -= 6;
 			p.sprite.setTextureRect(IntRect(120 * int(CurrentFrame), 293, 120, 120));  //через объект p класса player меняем спрайт, делая анимацию (используя оператор точку)
+			GetPlayerCoordinateforview(p.GetPlayerCoordinateX(), p.GetPlayerCoordinateY());//передаем координаты игрока в функцию управления камерой
+
 		}
 
 		if ((Keyboard::isKeyPressed(Keyboard::Up) || (Keyboard::isKeyPressed(Keyboard::W)))) {
 			p.dir = 3; p.speed = 0.1;//направление вниз, см выше
+			GetPlayerCoordinateforview(p.GetPlayerCoordinateX(), p.GetPlayerCoordinateY());//передаем координаты игрока в функцию управления камерой
+
 		}
 
 		if ((Keyboard::isKeyPressed(Keyboard::Down) || (Keyboard::isKeyPressed(Keyboard::S)))) { //если нажата клавиша стрелка влево или англ буква А
 			p.dir = 2; p.speed = 0.1;//направление вверх, см выше
+			GetPlayerCoordinateforview(p.GetPlayerCoordinateX(), p.GetPlayerCoordinateY());//передаем координаты игрока в функцию управления камерой
+
 		}
 
 		p.update(time);//оживляем объект p класса Player с помощью времени sfml, передавая время в качестве параметра функции update. благодаря этому персонаж может двигаться
 
-
+		viewmap(time);//функция скроллинга карты, передаем ей время sfml
+		changeview();//прикалываемся с камерой вида
+		window.setView(view);//"оживляем" камеру в окне sfml
 		window.clear();
+
+		/////////////////////////////Рисуем карту/////////////////////
+		for (int i = 0; i < HEIGHT_MAP; i++)
+			for (int j = 0; j < WIDTH_MAP; j++)
+			{
+				if (TileMap[i][j] == ' ')  s_map.setTextureRect(IntRect(0, 0, 32, 32)); //если встретили символ пробел, то рисуем 1й квадратик
+				if (TileMap[i][j] == 's')  s_map.setTextureRect(IntRect(32, 0, 32, 32));//если встретили символ s, то рисуем 2й квадратик
+				if ((TileMap[i][j] == '0')) s_map.setTextureRect(IntRect(64, 0, 32, 32));//если встретили символ 0, то рисуем 3й квадратик
+
+
+				s_map.setPosition(j * 32, i * 32);//по сути раскидывает квадратики, превращая в карту. то есть задает каждому из них позицию. если убрать, то вся карта нарисуется в одном квадрате 32*32 и мы увидим один квадрат
+
+				window.draw(s_map);//рисуем квадратики на экран
+			}
+
+
 		window.draw(p.sprite);//рисуем спрайт объекта p класса player
 		window.display();
 	}
